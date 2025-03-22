@@ -122,6 +122,21 @@ class AddressBook {
 
         return { groupedByCity, groupedByState };
     }
+
+    //count persons by city or state name
+    getContactCountByCityOrState() {
+        const countByCity = this.contacts.reduce((acc, contact) => {
+            acc[contact.city] = (acc[contact.city] || 0) + 1;
+            return acc;
+        }, {});
+
+        const countByState = this.contacts.reduce((acc, contact) => {
+            acc[contact.state] = (acc[contact.state] || 0) + 1;
+            return acc;
+        }, {});
+
+        return { countByCity, countByState };
+    }
 }
 
 const addressBook = new AddressBook();
@@ -146,9 +161,13 @@ console.log(JSON.stringify(addressBook.contacts,null,2));
 console.log("Number of contacts in address book:", addressBook.getContactCount());
 
 addressBook.addContact("Dhanraj", "beniwal", "hodal", "CityName", "Haryana", "121106", "1234567890", "dhanraj@gmail.com");
+
 // searching contacts by city or state
 console.log("Contacts in CityName:", addressBook.searchByCityOrState("Hodal"));
 console.log("Contacts in StateName:", addressBook.searchByCityOrState("Mathura"));
 
 //viewing persons by city or state
 console.log("Persons grouped by city and state:", addressBook.viewPersonsByCityOrState());
+
+//getting count by city and state
+console.log("Count of contacts by city and state:", addressBook.getContactCountByCityOrState());
