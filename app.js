@@ -53,6 +53,10 @@ class AddressBook {
     }
 
     addContact(firstName, lastName, address, city, state, zip, phone, email) {
+        if (this.contacts.some(c => c.firstName === firstName && c.lastName === lastName)) {
+            console.error('Duplicate contact entry detected. Contact not added.');
+            return;
+        }
         try {
             const contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
             this.contacts.push(contact);
@@ -75,7 +79,7 @@ class AddressBook {
             console.error('Contact not found.');
         }
     }
-///delete contact from the array
+//delete contact from the array
     findAndDeleteContact(name) {
         const index = this.contacts.findIndex(c => c.firstName === name || c.lastName === name);
         if (index !== -1) {
@@ -104,6 +108,27 @@ addressBook.addContact("Aryan", "Uttam", "Mathura", "CityName", "UttarPradesh", 
 
 console.log(JSON.stringify(addressBook.contacts));
 console.log();
+
+addressBook.findAndEditContact("Xyz",{city: "NewCity", phone: "9876543210"});
+console.log(JSON.stringify(addressBook.contacts,null,2));
+
+addressBook.findAndDeleteContact("Abc");
+console.log(JSON.stringify(addressBook.contacts,null,2));
+
+// Display contact count
+console.log("Number of contacts in address book:", addressBook.getContactCount());
+
+addressBook.addContact("Dhanraj", "beniwal", "hodal", "CityName", "Haryana", "121106", "1234567890", "dhanraj@gmail.com");
+
+
+
+
+
+
+
+
+
+
 
 addressBook.findAndEditContact("Xyz",{city: "NewCity", phone: "9876543210"});
 console.log(JSON.stringify(addressBook.contacts,null,2));
