@@ -50,3 +50,35 @@ class Contact {
         return `${this.firstName} ${this.lastName}, ${this.address}, ${this.city}, ${this.state}, ${this.zip}, Phone: ${this.phone}, Email: ${this.email}`;
     }
 }
+
+
+class AddressBook {
+    constructor() {
+        this.contacts = [];
+    }
+
+    addContact(firstName, lastName, address, city, state, zip, phone, email) {
+        try {
+            const contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
+            this.contacts.push(contact);
+            console.log('Contact added successfully:', contact);
+        } catch (error) {
+            console.error('Error adding contact:', error.message);
+        }
+    }
+
+    displayContacts() {
+        return this.contacts.map(contact => contact.displayContact());
+    }
+}
+
+const addressBook = new AddressBook();
+
+console.log(JSON.stringify(addressBook.contacts));
+addressBook.addContact("Dhanraj", "Beniwal", "Hodal", "CityName", "Haryana", "121106", "1234567890", "dhanraj@gmail.com");
+addressBook.addContact("Bharat", "Kumar", "Mathura", "CityName", "UttarPradesh", "281001", "1234567890", "bharat@gmail.com");
+addressBook.addContact("Rahul", "Sharma", "Hodal", "CityName", "Haryana", "121106", "1234567890", "rahul@gmail.com");
+addressBook.addContact("Deepak", "Sharma", "Mathura", "CityName", "UttarPradesh", "281001", "1234567890", "deepak@gmail.com");
+addressBook.addContact("Aryan", "Uttam", "Mathura", "CityName", "UttarPradesh", "281001", "1234567890", "aryan@gmail.com");
+console.log(JSON.stringify(addressBook.contacts));
+console.log();
