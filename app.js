@@ -137,6 +137,12 @@ class AddressBook {
 
         return { countByCity, countByState };
     }
+
+    //sort person by name
+    sortContactsByName() {
+        this.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
+        console.log('Sorted Contacts:', this.contacts.map(contact => contact.displayContact()));
+    }
 }
 
 const addressBook = new AddressBook();
@@ -171,3 +177,6 @@ console.log("Persons grouped by city and state:", addressBook.viewPersonsByCityO
 
 //getting count by city and state
 console.log("Count of contacts by city and state:", addressBook.getContactCountByCityOrState());
+
+// Sorting contacts by name
+addressBook.sortContactsByName();
